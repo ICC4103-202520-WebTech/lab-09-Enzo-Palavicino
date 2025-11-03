@@ -7,10 +7,21 @@ WORKDIR /app
 
 # Dependencias de sistema para Rails + activos
 RUN apt-get update -qq \
- && apt-get install --no-install-recommends -y build-essential curl git libpq-dev nodejs npm postgresql-client \
- && npm install --global yarn \
- && rm -rf /var/lib/apt/lists/*
-
+  && apt-get install --no-install-recommends -y \
+     build-essential \
+     curl \
+     git \
+     libpq-dev \
+     libsqlite3-dev \
+     libyaml-dev \
+     nodejs \
+     npm \
+     pkg-config \
+     postgresql-client \
+  && npm install --global yarn \
+  && gem install bundler -v 2.6.9 \
+  && rm -rf /var/lib/apt/lists/*
+  
 ENV RAILS_ENV=production \
     BUNDLE_DEPLOYMENT=1 \
     BUNDLE_PATH=/bundle \

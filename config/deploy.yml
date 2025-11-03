@@ -11,7 +11,7 @@ ssh:
 registry:
   username: enzopalavicino
   password:
-    - DOCKER_HUB_ACCESS_TOKEN # dckr_pat_VQa4NTbkQ7bAF7I-PfupTz_Dhuk
+    - DOCKER_HUB_ACCESS_TOKEN
 
 env:
   clear:
