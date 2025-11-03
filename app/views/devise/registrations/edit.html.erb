@@ -1,0 +1,55 @@
+<% content_for :title, "Edit account" %>
+
+<div class="row justify-content-center">
+  <div class="col-lg-6 col-xl-5">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <h1 class="h3 mb-3 text-center">Update your account</h1>
+        <%= render "devise/shared/error_messages", resource: resource %>
+
+        <%= form_with model: resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, data: { turbo: false } do |f| %>
+          <div class="mb-3">
+            <%= f.label :email, class: "form-label" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", required: true %>
+          </div>
+
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <p class="alert alert-warning">Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+          <% end %>
+
+          <div class="mb-3">
+            <%= f.label :password, class: "form-label" %>
+            <small class="text-muted d-block mb-2">Leave blank if you don't want to change it</small>
+            <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :password_confirmation, class: "form-label" %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+          </div>
+
+          <div class="mb-4">
+            <%= f.label :current_password, class: "form-label" %>
+            <small class="text-muted d-block mb-2">We need your current password to confirm changes</small>
+            <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control", required: true %>
+          </div>
+
+          <div class="d-grid gap-2">
+            <%= f.submit "Update", class: "btn btn-primary" %>
+            <%= link_to "Back", recipes_path, class: "btn btn-outline-secondary" %>
+          </div>
+        <% end %>
+
+        <hr class="my-4">
+
+        <div class="text-center">
+          <h2 class="h6">Cancel my account</h2>
+          <p class="text-muted small">If you deactivate your account, all your recipes will be removed.</p>
+          <%= button_to "Cancel my account", registration_path(resource_name), method: :delete,
+                form: { data: { turbo_confirm: "Are you sure you want to cancel your account?" } },
+                class: "btn btn-outline-danger" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

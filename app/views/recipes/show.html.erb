@@ -1,0 +1,36 @@
+<% content_for :title, @recipe.title %>
+
+<div class="d-flex justify-content-between align-items-start flex-wrap gap-3 mb-4">
+  <div>
+    <h1 class="display-6 mb-1"><%= @recipe.title %></h1>
+    <p class="text-muted mb-2">By <%= @recipe.user.email %></p>
+    <ul class="list-inline text-muted mb-0">
+      <li class="list-inline-item"><strong>Cook time:</strong> <%= @recipe.cook_time.present? ? "#{@recipe.cook_time} min" : "—" %></li>
+      <li class="list-inline-item"><strong>Difficulty:</strong> <%= @recipe.difficulty.presence || "—" %></li>
+      <li class="list-inline-item"><strong>Created:</strong> <%= l(@recipe.created_at, format: :long) %></li>
+    </ul>
+  </div>
+  <% if policy(@recipe).update? || policy(@recipe).destroy? %>
+    <div class="d-flex gap-2">
+      <% if policy(@recipe).update? %>
+        <%= link_to "Edit", edit_recipe_path(@recipe), class: "btn btn-outline-primary" %>
+      <% end %>
+      <% if policy(@recipe).destroy? %>
+        <%= button_to "Delete", @recipe, method: :delete,
+              form: { data: { turbo_confirm: "Are you sure you want to delete this recipe?" }, class: "d-inline" },
+              class: "btn btn-outline-danger" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<div class="card shadow-sm">
+  <div class="card-body">
+    <h2 class="h5 mb-3">Instructions</h2>
+    <div class="action-text"><%= @recipe.instructions %></div>
+  </div>
+</div>
+
+<div class="mt-4">
+  <%= link_to "← Back to recipes", recipes_path, class: "link-secondary" %>
+</div>

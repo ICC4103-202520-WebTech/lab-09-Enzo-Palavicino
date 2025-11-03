@@ -1,0 +1,19 @@
+<% content_for :title, "Edit Recipe" %>
+
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h1 class="h2 mb-1">Edit Recipe</h1>
+        <p class="text-muted mb-0"><%= @recipe.title %></p>
+      </div>
+      <%= link_to "Back", @recipe, class: "btn btn-outline-secondary" %>
+    </div>
+
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <%= render "form", recipe: @recipe %>
+      </div>
+    </div>
+  </div>
+</div>
